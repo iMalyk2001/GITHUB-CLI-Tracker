@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"log"
 	"fmt"
-
+	"io"
 )
 type Searx struct {
 	BaseURL string
@@ -43,8 +43,13 @@ func main (){
 	fmt.Println(resp)
 	defer resp.Body.Close()
 
+	body, err := io.ReadAll(resp.Body)
+    if err != nil {
+        panic(err)
+    }
 
-	
+
+	fmt.Println(string(body))
 
 }
 
